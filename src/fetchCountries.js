@@ -8,8 +8,7 @@ export default function fetchCountries(evt) {
   console.log(searchRequestByCountryName);
 
   if (searchRequestByCountryName === "") {
-      countryInfoRef.innerHTML = "";
-      countryListRef.innerHTML = "";
+      clearMarkup()
       return;
   };
   
@@ -36,7 +35,8 @@ export default function fetchCountries(evt) {
   outputListOfCountries(data);    
 })
 .catch(() => {
-Notiflix.Notify.failure("Oops, there is no country with that name");
+  clearMarkup()  
+  Notiflix.Notify.failure("Oops, there is no country with that name");
 })
 };
         
@@ -50,7 +50,7 @@ function outputListOfCountries(data){
   
       countryInfoRef.innerHTML = "";
       countryListRef.innerHTML = markup; 
-}
+};
 
 function outputOneCountry(data){
   const country = data[0];
@@ -70,4 +70,9 @@ function outputOneCountry(data){
     
     countryListRef.innerHTML = "";
     countryInfoRef.innerHTML = markup;
-    }
+    };
+
+function clearMarkup() {
+  countryInfoRef.innerHTML = "";
+  countryListRef.innerHTML = ""; 
+};
