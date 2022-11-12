@@ -6,7 +6,8 @@ export default function fetchCountries(evt) {
     const searchRequestByCountryName = evt.target.value;
         
 fetch(`
-    https://restcountries.com/v3.1/name/${searchRequestByCountryName}?fields=name,capital,population,flags,languages`
+    https://restcountries.com/v3.1/name/${searchRequestByCountryName}
+    ?fields=name,capital,population,flags,languages`
 ).then(response => response.json())
 .then(data => {
     console.log(data);
@@ -21,7 +22,7 @@ fetch(`
 };
 
 function outputListOfCountries(data){
-    if(!data) {return};
+    // if(!data) {return};
   const markup = data.map(country => `
   <li class="country-item">
     <img src=${country.flags.svg} alt="" width="20px">
