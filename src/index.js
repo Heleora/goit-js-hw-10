@@ -1,5 +1,6 @@
 import './css/styles.css';
 import debounce from 'lodash.debounce';
+import Notiflix from 'notiflix';
 // import fetchCountries from "./fetchCountries";
 
 const DEBOUNCE_DELAY = 300;
@@ -57,17 +58,28 @@ const styles = `
 headRef.insertAdjacentHTML("beforeend", styles);
 
 function fetchCountries(evt) {
-    const searchRequestByCountryName = evt.target.value;
+    const searchRequestByCountryName = evt.target.value.trim();
     console.log(searchRequestByCountryName);
+
+    if (searchRequestByCountryName === "") {
+        countryInfoRef.innerHTML = "";
+        countryListRef.innerHTML = "";
+        return;
+    };
     
-fetch(`
-    https://restcountries.com/v3.1/name/${searchRequestByCountryName}?fields=name,capital,population,flags,languages`
-).then(response => response.json())
+    fetch(`
+    https://restcountries.com/v3.1/name/${searchRequestByCountryName}?fields=name,capital,population,flags,languages`)
+    .then(response => response.json())
 .then(data => {
     console.log(data);
 
+    if (data.length > 10) {
+        return Notiflix.Notify.info(
+            "Too many matches found. Please enter a more specific name.");
+    }
+
     if (data.length === 1){
-      return outputOneCountry(data);
+        return outputOneCountry(data);
     }
     
     outputListOfCountries(data);    
