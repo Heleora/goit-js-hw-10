@@ -55,7 +55,6 @@ function outputListOfCountries(data){
 function outputOneCountry(data){
   const country = data[0];
   const languages = Object.values(country.languages).join(", ");
-  console.log(languages);
 
     const markup = `
     <p class="country-name">
