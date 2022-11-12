@@ -8,7 +8,7 @@ export default function fetchCountries(evt) {
   console.log(searchRequestByCountryName);
 
   if (searchRequestByCountryName === "") {
-      clearMarkup()
+      clearMarkup();
       return;
   };
   
@@ -24,6 +24,7 @@ export default function fetchCountries(evt) {
   console.log(data);
 
   if (data.length > 10) {
+      clearMarkup();
       return Notiflix.Notify.info(
           "Too many matches found. Please enter a more specific name.");
   }
@@ -35,7 +36,7 @@ export default function fetchCountries(evt) {
   outputListOfCountries(data);    
 })
 .catch(() => {
-  clearMarkup()  
+  clearMarkup();  
   Notiflix.Notify.failure("Oops, there is no country with that name");
 })
 };
