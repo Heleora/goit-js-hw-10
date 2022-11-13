@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 const countryListRef = document.querySelector(".country-list");
 const countryInfoRef = document.querySelector(".country-info");
 
-export default function fetchCountries(evt) {
+function fetchCountries(evt) {
   const searchRequestByCountryName = evt.target.value.trim();
   console.log(searchRequestByCountryName);
 
